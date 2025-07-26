@@ -1,79 +1,69 @@
-# Dynamic React Schema
+# React + TypeScript + Vite
 
-This repository contains a very small proof‑of‑concept library that emulates the
-behaviour of the [`crs‑schema`](https://github.com/caperaven/crs-schema) project
-but for React.  Instead of generating static HTML strings, it reads a JSON
-schema at runtime and produces React elements on the fly.  Each element in
-the schema is handled by a **provider**.  Providers are pluggable classes that
-know how to turn a particular type of schema node into a React component.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-* **Runtime schema parsing** – define your user interface as a JSON document and
-  render it without writing JSX.
-* **Provider based** – register providers for each element type you want to
-  support (e.g. `Header`, `Button`).  Providers return React elements.
-* **TypeScript** – the library is written in TypeScript and exports type
-  definitions for use in your own projects.
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Example
+## Expanding the ESLint configuration
 
-```tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import { SchemaManager } from 'dynamic-react-schema';
-import HeaderProvider from 'dynamic-react-schema/dist/providers/HeaderProvider';
-import ButtonProvider from 'dynamic-react-schema/dist/providers/ButtonProvider';
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-// Define a simple JSON schema describing your UI.
-const template = {
-  type: 'Header',
-  props: { text: 'Hello, schema world!' },
-  children: [
-    {
-      type: 'Button',
-      props: { label: 'Click me', onClick: () => alert('Clicked!') }
-    }
-  ]
-};
+```js
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
-// Create and configure the schema manager.
-const manager = new SchemaManager();
-manager.register(new HeaderProvider());
-manager.register(new ButtonProvider());
+      // Remove tseslint.configs.recommended and replace with this
+      ...tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      ...tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      ...tseslint.configs.stylisticTypeChecked,
 
-// Parse the schema into React elements.
-const element = manager.parse(template);
-
-const root = ReactDOM.createRoot(document.getElementById('app')!);
-root.render(element);
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-See the `src/` folder for the implementation.  The core pieces are:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-* [`src/types.ts`](./src/types.ts) – defines the `SchemaNode` interface used
-  throughout the library.
-* [`src/SchemaManager.ts`](./src/SchemaManager.ts) – keeps a registry of
-  providers and exposes a `parse` method to convert a schema into React nodes.
-* [`src/providers/HeaderProvider.tsx`](./src/providers/HeaderProvider.tsx) – an
-  example provider that renders a `<h1>` element.
-* [`src/providers/ButtonProvider.tsx`](./src/providers/ButtonProvider.tsx) – an
-  example provider that renders a `<button>` element.
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-The project is minimal by design: it illustrates how you might build a
-provider‑based schema parser for React.  Feel free to extend it with more
-providers (for images, inputs, layout components, etc.) and add your own
-features such as prop validation, event wiring, or conditional logic.
-
-## Building
-
+export default tseslint.config([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-npm install
-npm run build
-```
-
-This will compile the TypeScript in `src/` into the `dist/` folder.
-
-## License
-
-MIT
