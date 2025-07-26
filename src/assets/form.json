@@ -1,55 +1,46 @@
 {
-	"type": "form",
-	"title": "Person",
-	"fields": [
+	"type": "Container",
+	"props": { "maxWidth": "sm" },
+	"children": [
 		{
-			"type": "text",
-			"name": "firstName",
-			"label": "First Name",
-			"required": true
-		},
-		{
-			"type": "text",
-			"name": "lastName",
-			"label": "Last Name",
-			"required": true
-		},
-		{
-			"type": "email",
-			"name": "email",
-			"label": "Email",
-			"required": true
-		},
-		{
-			"type": "tel",
-			"name": "phone",
-			"label": "Phone Number",
-			"required": false
-		},
-		{
-			"type": "date",
-			"name": "dateOfBirth",
-			"label": "Date of Birth",
-			"required": false
+			"type": "Box",
+			"props": { "component": "form", "noValidate": true, "autoComplete": "off", "sx": { "display": "flex", "flexDirection": "column", "gap": 2 } },
+			"children": [
+				{
+					"type": "TextField",
+					"props": { "name": "firstName", "label": "First Name", "required": true, "fullWidth": true }
+				},
+				{
+					"type": "TextField",
+					"props": { "name": "lastName", "label": "Last Name", "required": true, "fullWidth": true }
+				},
+				{
+					"type": "TextField",
+					"props": { "name": "email", "label": "Email", "type": "email", "required": true, "fullWidth": true }
+				},
+				{
+					"type": "TextField",
+					"props": { "name": "phone", "label": "Phone Number", "type": "tel", "fullWidth": true }
+				},
+				{
+					"type": "TextField",
+					"props": { "name": "dateOfBirth", "label": "Date of Birth", "type": "date", "InputLabelProps": { "shrink": true }, "fullWidth": true }
+				},
+				{
+					"type": "Box",
+					"props": { "sx": { "display": "flex", "justifyContent": "flex-end", "gap": 2, "mt": 2 } },
+					"children": [
+						{
+							"type": "Button",
+							"props": { "variant": "outlined", "type": "button", "children": "Cancel" }
+						},
+						{
+							"type": "Button",
+							"props": { "variant": "contained", "type": "submit", "children": "Save" }
+						}
+					]
+				}
+			]
 		}
-	],
-	"toolbar": {
-		"position": "bottom",
-		"buttons": [
-			{
-				"type": "button",
-				"name": "cancel",
-				"label": "Cancel",
-				"variant": "outlined",
-				"action": "cancel"
-			},
-			{
-				"type": "submit",
-				"name": "save",
-				"label": "Save",
-				"variant": "contained",
-				"action": "submit"
-			}
-		]
-	}
+	]
 }
