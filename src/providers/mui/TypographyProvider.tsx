@@ -1,7 +1,18 @@
+import React from 'react';
 import Typography from '@mui/material/Typography';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const TypographyProvider = (props: any) => {
-  return <Typography {...props} />;
-};
+export default class TypographyProvider implements Provider<SchemaNode> {
+  public readonly type = 'Typography';
 
-export default TypographyProvider;
+  public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
+    const { props = {}, children } = node;
+    const parsedChildren = manager.parseChildren(children);
+    return React.createElement(
+      Typography,
+      props,
+      ...parsedChildren
+    );
+  }
+}

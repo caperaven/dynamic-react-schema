@@ -1,7 +1,19 @@
+import React from 'react';
 import ToggleButton from '@mui/material/ToggleButton';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const ToggleButtonProvider = (props: any) => {
-  return <ToggleButton {...props} />;
-};
+export default class ToggleButtonProvider implements Provider<SchemaNode> {
+  public readonly type = 'ToggleButton';
 
-export default ToggleButtonProvider;
+  public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
+    const { props = {}, children } = node;
+    const parsedChildren = manager.parseChildren(children);
+    const { value = '', ...restProps } = props;
+    return React.createElement(
+      ToggleButton,
+      { value, ...restProps },
+      ...parsedChildren
+    );
+  }
+}

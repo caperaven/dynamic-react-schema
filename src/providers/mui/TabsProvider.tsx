@@ -1,7 +1,18 @@
+import React from 'react';
 import Tabs from '@mui/material/Tabs';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const TabsProvider = ({ children, ...props }: any) => {
-  return <Tabs {...props}>{children}</Tabs>;
-};
+export default class TabsProvider implements Provider<SchemaNode> {
+  public readonly type = 'Tabs';
 
-export default TabsProvider;
+  public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
+    const { props = {}, children } = node;
+    const parsedChildren = manager.parseChildren(children);
+    return React.createElement(
+      Tabs,
+      props,
+      ...parsedChildren
+    );
+  }
+}

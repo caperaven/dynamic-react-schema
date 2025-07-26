@@ -1,7 +1,16 @@
+import React from 'react';
 import ImageListItemBar from '@mui/material/ImageListItemBar';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const ImageListItemBarProvider = (props: any) => {
-  return <ImageListItemBar {...props} />;
-};
+export default class ImageListItemBarProvider implements Provider<SchemaNode> {
+  public readonly type = 'ImageListItemBar';
 
-export default ImageListItemBarProvider;
+  public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
+    const { props = {} } = node;
+    return React.createElement(
+      ImageListItemBar,
+      props
+    );
+  }
+}
