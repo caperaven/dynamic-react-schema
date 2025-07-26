@@ -41,13 +41,15 @@ describe('ButtonProvider', () => {
   });
 
   it('calls onClick when Button is clicked', () => {
-    const provider = new ButtonProvider();
-    const onClick = vi.fn();
-    const node = { type: 'Button', props: { onClick, 'data-testid': 'button' } };
-    const element = provider.parse(node, mockManager);
-    const { getByTestId } = render(<>{element}</>);
-    const button = getByTestId('button');
-    fireEvent.click(button);
-    expect(onClick).toHaveBeenCalled();
+  const provider = new ButtonProvider();
+  const onClick = vi.fn();
+  const node = { type: 'Button', props: { onClick, 'data-testid': 'button' } };
+  const element = provider.parse(node, mockManager);
+  const { getByTestId } = render(<>{element}</>);
+  const button = getByTestId('button');
+  // ButtonProvider renders a MUI Button, which is a button element
+  const btn = button.querySelector('button') || button;
+  fireEvent.click(btn);
+  expect(onClick).toHaveBeenCalled();
   });
 });

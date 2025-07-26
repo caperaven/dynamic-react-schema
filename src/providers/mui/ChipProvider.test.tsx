@@ -15,13 +15,15 @@ describe('ChipProvider', () => {
   });
 
   it('calls onClick when Chip is clicked', () => {
-    const provider = new ChipProvider();
-    const onClick = vi.fn();
-    const node = { type: 'Chip', props: { label: 'Clickable', onClick, 'data-testid': 'chip' } };
-    const element = provider.parse(node, {} as any);
-    const { getByTestId } = render(<>{element}</>);
-    const chip = getByTestId('chip');
-    fireEvent.click(chip);
-    expect(onClick).toHaveBeenCalled();
+  const provider = new ChipProvider();
+  const onClick = vi.fn();
+  const node = { type: 'Chip', props: { label: 'Clickable', onClick, 'data-testid': 'chip' } };
+  const element = provider.parse(node, {} as any);
+  const { getByTestId } = render(<>{element}</>);
+  const chip = getByTestId('chip');
+  // Chip is a button, so click on the button element if present
+  const button = chip.querySelector('button') || chip;
+  fireEvent.click(button);
+  expect(onClick).toHaveBeenCalled();
   });
 });
