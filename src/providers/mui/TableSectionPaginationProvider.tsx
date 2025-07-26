@@ -8,9 +8,17 @@ export default class TableSectionPaginationProvider implements Provider<SchemaNo
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
+    // TablePagination requires: count, onPageChange, page, rowsPerPage
+    const {
+      count = 0,
+      onPageChange = () => {},
+      page = 0,
+      rowsPerPage = 10,
+      ...rest
+    } = props;
     return React.createElement(
       TablePagination,
-      props
+      { count, onPageChange, page, rowsPerPage, ...rest }
     );
   }
 }
