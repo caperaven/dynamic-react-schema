@@ -1,0 +1,55 @@
+{
+	"type": "form",
+	"title": "Person",
+	"fields": [
+		{
+			"type": "text",
+			"name": "firstName",
+			"label": "First Name",
+			"required": true
+		},
+		{
+			"type": "text",
+			"name": "lastName",
+			"label": "Last Name",
+			"required": true
+		},
+		{
+			"type": "email",
+			"name": "email",
+			"label": "Email",
+			"required": true
+		},
+		{
+			"type": "tel",
+			"name": "phone",
+			"label": "Phone Number",
+			"required": false
+		},
+		{
+			"type": "date",
+			"name": "dateOfBirth",
+			"label": "Date of Birth",
+			"required": false
+		}
+	],
+	"toolbar": {
+		"position": "bottom",
+		"buttons": [
+			{
+				"type": "button",
+				"name": "cancel",
+				"label": "Cancel",
+				"variant": "outlined",
+				"action": "cancel"
+			},
+			{
+				"type": "submit",
+				"name": "save",
+				"label": "Save",
+				"variant": "contained",
+				"action": "submit"
+			}
+		]
+	}
+}
