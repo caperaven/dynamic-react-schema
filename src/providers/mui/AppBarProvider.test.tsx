@@ -1,7 +1,7 @@
 import React from 'react';
 import { describe, it, expect } from 'vitest';
 import { render } from '@testing-library/react';
-import AppBarProvider from '../AppBarProvider';
+import AppBarProvider from './AppBarProvider';
 import '@testing-library/jest-dom';
 
 // Mock SchemaManager for testing
