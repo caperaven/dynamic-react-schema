@@ -12,8 +12,10 @@ export default class BreadcrumbsProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <Breadcrumbs {...props}>{parsedChildren}</Breadcrumbs>
+    return React.createElement(
+      Breadcrumbs,
+      props,
+      ...parsedChildren
     );
   }
 }

@@ -11,8 +11,9 @@ export default class CircularProgressProvider implements Provider<SchemaNode> {
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
-    return (
-      <CircularProgress {...props} />
+    return React.createElement(
+      CircularProgress,
+      props
     );
   }
 }

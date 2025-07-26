@@ -12,8 +12,10 @@ export default class ButtonGroupProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <ButtonGroup {...props}>{parsedChildren}</ButtonGroup>
+    return React.createElement(
+      ButtonGroup,
+      props,
+      ...parsedChildren
     );
   }
 }

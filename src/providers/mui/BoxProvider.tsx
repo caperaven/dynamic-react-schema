@@ -12,8 +12,10 @@ export default class BoxProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <Box {...props}>{parsedChildren}</Box>
+    return React.createElement(
+      Box,
+      props,
+      ...parsedChildren
     );
   }
 }

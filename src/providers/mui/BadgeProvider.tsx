@@ -12,8 +12,10 @@ export default class BadgeProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <Badge {...props}>{parsedChildren}</Badge>
+    return React.createElement(
+      Badge,
+      props,
+      ...parsedChildren
     );
   }
 }

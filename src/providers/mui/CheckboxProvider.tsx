@@ -11,8 +11,9 @@ export default class CheckboxProvider implements Provider<SchemaNode> {
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
-    return (
-      <Checkbox {...props} />
+    return React.createElement(
+      Checkbox,
+      props
     );
   }
 }

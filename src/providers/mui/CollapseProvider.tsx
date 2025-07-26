@@ -12,8 +12,10 @@ export default class CollapseProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <Collapse {...props}>{parsedChildren}</Collapse>
+    return React.createElement(
+      Collapse,
+      props,
+      ...parsedChildren
     );
   }
 }

@@ -11,8 +11,9 @@ export default class CardMediaProvider implements Provider<SchemaNode> {
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
-    return (
-      <CardMedia {...props} />
+    return React.createElement(
+      CardMedia,
+      props
     );
   }
 }

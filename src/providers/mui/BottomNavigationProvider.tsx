@@ -12,8 +12,10 @@ export default class BottomNavigationProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <BottomNavigation {...props}>{parsedChildren}</BottomNavigation>
+    return React.createElement(
+      BottomNavigation,
+      props,
+      ...parsedChildren
     );
   }
 }

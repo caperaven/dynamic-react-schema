@@ -12,8 +12,10 @@ export default class ContainerProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <Container {...props}>{parsedChildren}</Container>
+    return React.createElement(
+      Container,
+      props,
+      ...parsedChildren
     );
   }
 }

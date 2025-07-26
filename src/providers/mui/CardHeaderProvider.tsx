@@ -11,8 +11,9 @@ export default class CardHeaderProvider implements Provider<SchemaNode> {
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
-    return (
-      <CardHeader {...props} />
+    return React.createElement(
+      CardHeader,
+      props
     );
   }
 }

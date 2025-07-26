@@ -12,8 +12,10 @@ export default class CardActionAreaProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <CardActionArea {...props}>{parsedChildren}</CardActionArea>
+    return React.createElement(
+      CardActionArea,
+      props,
+      ...parsedChildren
     );
   }
 }

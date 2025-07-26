@@ -12,8 +12,10 @@ export default class AppBarProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <AppBar {...props}>{parsedChildren}</AppBar>
+    return React.createElement(
+      AppBar,
+      props,
+      ...parsedChildren
     );
   }
 }

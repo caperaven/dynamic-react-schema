@@ -12,8 +12,10 @@ export default class AvatarProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
-    return (
-      <Avatar {...props}>{parsedChildren}</Avatar>
+    return React.createElement(
+      Avatar,
+      props,
+      ...parsedChildren
     );
   }
 }
