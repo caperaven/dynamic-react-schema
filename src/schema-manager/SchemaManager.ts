@@ -1,5 +1,5 @@
 import React from 'react';
-import { SchemaNode, Provider } from './types';
+import type { SchemaNode, Provider } from './types';
 
 /**
  * The `SchemaManager` coordinates parsing of a JSON UI schema into React

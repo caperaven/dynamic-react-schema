@@ -1,6 +1,6 @@
 import React from 'react';
-import { SchemaNode, Provider } from '../types';
-import type { SchemaManager } from '../SchemaManager';
+import type { SchemaNode, Provider } from '../schema-manager/types';
+import type { SchemaManager } from './../schema-manager/SchemaManager';
 
 /**
  * Provider for rendering heading elements.  It expects a schema node with
