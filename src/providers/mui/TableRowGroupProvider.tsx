@@ -1,8 +1,18 @@
+import React from 'react';
 import TableRow from '@mui/material/TableRow';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const TableRowGroupProvider = (props: any) => {
-  // TableRowGroup is not a direct MUI component, but for completeness:
-  return <TableRow {...props} />;
-};
+export default class TableRowGroupProvider implements Provider<SchemaNode> {
+  public readonly type = 'TableRowGroup';
 
-export default TableRowGroupProvider;
+  public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
+    const { props = {}, children } = node;
+    const parsedChildren = manager.parseChildren(children);
+    return React.createElement(
+      TableRow,
+      props,
+      ...parsedChildren
+    );
+  }
+}
