@@ -9,9 +9,11 @@ export default class TabsProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
+    // Default value to 0 if not provided
+    const { value = 0, ...restProps } = props;
     return React.createElement(
       Tabs,
-      props,
+      { value, ...restProps },
       ...parsedChildren
     );
   }

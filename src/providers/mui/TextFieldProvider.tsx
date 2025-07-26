@@ -8,9 +8,10 @@ export default class TextFieldProvider implements Provider<SchemaNode> {
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
+    const defaultProps = { size: 'small' as 'small' };
     return React.createElement(
       TextField,
-      props
+      { ...defaultProps, ...props }
     );
   }
 }

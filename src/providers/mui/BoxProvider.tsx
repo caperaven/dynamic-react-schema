@@ -12,10 +12,18 @@ export default class BoxProvider implements Provider<SchemaNode> {
   public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
     const { props = {}, children } = node;
     const parsedChildren = manager.parseChildren(children);
+    // Add keys to children if more than one child
+    const childrenWithKeys = Array.isArray(parsedChildren)
+      ? parsedChildren.map((child, idx) =>
+          React.isValidElement(child) && child.key == null
+            ? React.cloneElement(child, { key: idx })
+            : child
+        )
+      : parsedChildren;
     return React.createElement(
       Box,
       props,
-      ...parsedChildren
+      ...childrenWithKeys
     );
   }
 }

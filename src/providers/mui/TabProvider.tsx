@@ -11,8 +11,9 @@ export default class TabProvider implements Provider<SchemaNode> {
 
   public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
     const { props = {} } = node;
-    return (
-      <Tab {...props} />
+    return React.createElement(
+      Tab,
+      props
     );
   }
 }
