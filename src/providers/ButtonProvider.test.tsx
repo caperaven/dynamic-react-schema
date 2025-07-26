@@ -1,3 +1,4 @@
+import React from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { render, fireEvent } from '@testing-library/react';
 import ButtonProvider from './ButtonProvider';
@@ -5,7 +6,18 @@ import '@testing-library/jest-dom';
 
 // Mock SchemaManager for testing
 const mockManager = {
-  parseChildren: (children: any) => Array.isArray(children) ? children : (children ? [children] : []),
+  parseChildren: (children: any) => {
+    if (!children) return [];
+    if (Array.isArray(children)) {
+      return children.map(child => {
+        if (typeof child === 'object' && child.type && child.props) {
+          return React.createElement(child.type, child.props);
+        }
+        return child;
+      });
+    }
+    return [children];
+  },
 } as any;
 
 describe('ButtonProvider', () => {
