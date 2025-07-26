@@ -7,6 +7,7 @@ import TabProvider from './providers/mui/TabProvider';
 import TabContextProvider from './providers/mui/TabContextProvider';
 import TabListProvider from './providers/mui/TabListProvider';
 import TabPanelProvider from './providers/mui/TabPanelProvider';
+import TabsSheetProvider from './providers/mui/TabsSheetProvider';
 import type { SchemaManager } from './schema-manager/SchemaManager';
 
 export function registerMuiProviders(manager: SchemaManager) {
@@ -19,4 +20,5 @@ export function registerMuiProviders(manager: SchemaManager) {
     manager.register(new TabContextProvider());
     manager.register(new TabListProvider());
     manager.register(new TabPanelProvider());
+    manager.register(new TabsSheetProvider());
 }

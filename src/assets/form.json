@@ -1,67 +1,94 @@
 {
-	"type": "Container",
-	"props": { "maxWidth": "sm" },
+	"type": "Box",
+	"props": {
+		"component": "form",
+		"noValidate": true,
+		"autoComplete": "off",
+		"sx": {
+			"display": "flex",
+			"flexDirection": "column",
+			"gap": 2,
+			"maxWidth": 600,
+			"mx": "auto",
+			"mt": 4
+		}
+	},
 	"children": [
 		{
-			"type": "TabContext",
-			"props": { "value": "1" },
+			"type": "TextField",
+			"props": {
+				"name": "firstName",
+				"label": "First Name",
+				"required": true,
+				"fullWidth": true
+			}
+		},
+		{
+			"type": "TextField",
+			"props": {
+				"name": "lastName",
+				"label": "Last Name",
+				"required": true,
+				"fullWidth": true
+			}
+		},
+		{
+			"type": "TextField",
+			"props": {
+				"name": "email",
+				"label": "Email",
+				"type": "email",
+				"required": true,
+				"fullWidth": true
+			}
+		},
+		{
+			"type": "TextField",
+			"props": {
+				"name": "phone",
+				"label": "Phone Number",
+				"type": "tel",
+				"fullWidth": true
+			}
+		},
+		{
+			"type": "TextField",
+			"props": {
+				"name": "dateOfBirth",
+				"label": "Date of Birth",
+				"type": "date",
+				"InputLabelProps": {
+					"shrink": true
+				},
+				"fullWidth": true
+			}
+		},
+		{
+			"type": "Box",
+			"props": {
+				"sx": {
+					"display": "flex",
+					"justifyContent": "flex-end",
+					"gap": 2,
+					"mt": 2
+				}
+			},
 			"children": [
 				{
-					"type": "Box",
-					"props": { "sx": { "borderBottom": 1, "borderColor": "divider" } },
-					"children": [
-						{
-							"type": "TabList",
-							"props": { "aria-label": "lab API tabs example" },
-							"children": [
-								{ "type": "Tab", "props": { "label": "Personal Info", "value": "1" } },
-								{ "type": "Tab", "props": { "label": "Address", "value": "2" } }
-							]
-						}
-					]
+					"type": "Button",
+					"props": {
+						"variant": "outlined",
+						"type": "button",
+						"children": "Cancel"
+					}
 				},
 				{
-					"type": "TabPanel",
-					"props": { "value": "1" },
-					"children": [
-						{
-							"type": "Box",
-							"props": { "component": "form", "noValidate": true, "autoComplete": "off", "sx": { "display": "flex", "flexDirection": "column", "gap": 2 } },
-							"children": [
-								{ "type": "TextField", "props": { "name": "firstName", "label": "First Name", "required": true, "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "lastName", "label": "Last Name", "required": true, "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "email", "label": "Email", "type": "email", "required": true, "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "phone", "label": "Phone Number", "type": "tel", "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "dateOfBirth", "label": "Date of Birth", "type": "date", "InputLabelProps": { "shrink": true }, "fullWidth": true } },
-								{
-									"type": "Box",
-									"props": { "sx": { "display": "flex", "justifyContent": "flex-end", "gap": 2, "mt": 2 } },
-									"children": [
-										{ "type": "Button", "props": { "variant": "outlined", "type": "button", "children": "Cancel" } },
-										{ "type": "Button", "props": { "variant": "contained", "type": "submit", "children": "Save" } }
-									]
-								}
-							]
-						}
-					]
-				},
-				{
-					"type": "TabPanel",
-					"props": { "value": "2" },
-					"children": [
-						{
-							"type": "Box",
-							"props": { "component": "form", "noValidate": true, "autoComplete": "off", "sx": { "display": "flex", "flexDirection": "column", "gap": 2 } },
-							"children": [
-								{ "type": "TextField", "props": { "name": "address1", "label": "Address Line 1", "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "address2", "label": "Address Line 2", "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "city", "label": "City", "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "state", "label": "State/Province", "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "zip", "label": "ZIP/Postal Code", "fullWidth": true } },
-								{ "type": "TextField", "props": { "name": "country", "label": "Country", "fullWidth": true } }
-							]
-						}
-					]
+					"type": "Button",
+					"props": {
+						"variant": "contained",
+						"type": "submit",
+						"children": "Save"
+					}
 				}
 			]
 		}
