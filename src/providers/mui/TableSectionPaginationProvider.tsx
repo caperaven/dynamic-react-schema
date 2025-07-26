@@ -1,8 +1,16 @@
+import React from 'react';
 import TablePagination from '@mui/material/TablePagination';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const TableSectionPaginationProvider = (props: any) => {
-  // TableSectionPagination is not a direct MUI component, but for completeness:
-  return <TablePagination {...props} />;
-};
+export default class TableSectionPaginationProvider implements Provider<SchemaNode> {
+  public readonly type = 'TableSectionPagination';
 
-export default TableSectionPaginationProvider;
+  public parse(node: SchemaNode, _manager: SchemaManager): React.ReactNode {
+    const { props = {} } = node;
+    return React.createElement(
+      TablePagination,
+      props
+    );
+  }
+}

@@ -1,8 +1,18 @@
+import React from 'react';
 import TableSortLabel from '@mui/material/TableSortLabel';
+import type { SchemaNode, Provider } from '../../schema-manager/types';
+import type { SchemaManager } from '../../schema-manager/SchemaManager';
 
-const TableSectionSortLabelProvider = (props: any) => {
-  // TableSectionSortLabel is not a direct MUI component, but for completeness:
-  return <TableSortLabel {...props} />;
-};
+export default class TableSectionSortLabelProvider implements Provider<SchemaNode> {
+  public readonly type = 'TableSectionSortLabel';
 
-export default TableSectionSortLabelProvider;
+  public parse(node: SchemaNode, manager: SchemaManager): React.ReactNode {
+    const { props = {}, children } = node;
+    const parsedChildren = manager.parseChildren(children);
+    return React.createElement(
+      TableSortLabel,
+      props,
+      ...parsedChildren
+    );
+  }
+}
